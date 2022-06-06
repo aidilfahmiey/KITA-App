@@ -17,7 +17,7 @@ const Posts = ({navigation}) => {
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
   const [image, setImage] = useState(null);
-  const [WHText, setWHText] = useState("");
+  const [WHText, setWHText] = useState(null);
 
   useEffect(() => {
     (async () => {

@@ -1,4 +1,4 @@
-import { View, Text, Image, Modal, TouchableOpacity } from 'react-native';
+import { View, Text, Image, Modal, TouchableOpacity, Alert } from 'react-native';
 import React from 'react';
 import { uploadstyle } from '../../config/Upload';
 import { getAuth } from "firebase/auth";
@@ -11,14 +11,20 @@ export default function Upload(props, {navigation}) {
     console.log(props.route.params.image)
     console.log(props.route.params.WHText)
 
+    const UserText = props.route.params.WHText;
+    const uri = props.route.params.image;
+
+    
     const uploadPost = async () => {
 
-        const uri = props.route.params.image;
-        const UserText = props.route.params.WHText;
+      if (uri == null) {
+        Alert.alert('Must include photo.')
+        return;
+      }
+        
         const childPath = `post/${Firebase.auth().currentUser.uid}/${'Image'+Math.random().toString(36)}`;
         console.log(childPath)
         console.log(uri)
-        console.log(UserText)
     
         const response = await fetch(uri)
         const blob = await response.blob();
@@ -37,7 +43,10 @@ export default function Upload(props, {navigation}) {
           task.snapshot.ref.getDownloadURL().then((snapshot) => {
             
             console.log(snapshot);
+            
             savePostData(snapshot);
+            
+            
           })
         }
     
@@ -50,53 +59,52 @@ export default function Upload(props, {navigation}) {
         
         props.navigation.navigate("KITA App");
     }
+    
+    
+      const savePostData = (downloadURL) => {
 
-    const savePostData = (downloadURL) => {
-      const UserText = props.route.params.WHText;
-
-      console.log("save post data run")
-        Firebase
-            .firestore()
-            .collection('posts')
-            .doc(Firebase.auth().currentUser.uid)
-            .collection('userPosts')
-            .add({
-                downloadURL,
-                creation: serverTimestamp(),
-                UserText: UserText,
-                uid: Firebase.auth().currentUser.uid,
-            }).then((function (){
-              props.navigation.navigate("KITA App");
-            }))
-    }
+          console.log("save post data run")
+          Firebase
+              .firestore()
+              .collection('posts')
+              .doc(Firebase.auth().currentUser.uid)
+              .collection('userPosts')
+              .add({
+                  downloadURL: downloadURL,
+                  creation: serverTimestamp(),
+                  UserText: UserText,
+                  uid: Firebase.auth().currentUser.uid,
+              }).then((function (){
+                props.navigation.navigate("KITA App");
+              })) 
+      }
 
     const navigateToPrevScreen = () => {
-        props.navigation.navigate("KITA App");
+        props.navigation.navigate("Create Post");
       }
 
   return (
     <View style={uploadstyle.main}>
 
-        <Image source={{uri: props.route.params.image}}/>
+      <View style={uploadstyle.contain}>
+      
+        <Text style={uploadstyle.modalTextHeader}>Confirm update?</Text>
 
-        <Modal visible={true}>
-            <View style={uploadstyle.modal}>
-                <Text style={uploadstyle.modalTextHeader}>Confirmation</Text>
+          <TouchableOpacity
+            style={uploadstyle.ButtonConfirm}
+            onPress={() => uploadPost()}>
+            <Text style={uploadstyle.modalTextButtonConfirm}>Send</Text>
+          </TouchableOpacity>
 
-                <TouchableOpacity
-                    style={uploadstyle.modalTextButton}
-                    onPress={() => uploadPost()}>
-                    <Text style={uploadstyle.modalTextButtonConfirm}>Post</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={uploadstyle.modalTextButton}
-                    onPress={navigateToPrevScreen}>
-                    <Text style={uploadstyle.modalTextButtonReturn}>Discard</Text>
-                </TouchableOpacity>
+          <TouchableOpacity
+            style={uploadstyle.ButtonReturn}
+            onPress={navigateToPrevScreen}>
+            <Text style={uploadstyle.modalTextButtonReturn}>Discard</Text>
+          </TouchableOpacity>
 
-            </View>
-        </Modal>
+      </View>
 
     </View>
   )
 }
+
