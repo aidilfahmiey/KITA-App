@@ -77,18 +77,18 @@ export default function CitizenRegister(props) {
 
                     
                     <TextInput
-                        style={styles.inputText}
+                        style={styles.inputTextReg}
                         placeholder= 'Name'
                         value={name}
                         onChangeText= {(name)=> setName(name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '').replace(/[^a-z0-9]/gi, ''))}
                     />
                     <TextInput
-                        style={styles.inputText}
+                        style={styles.inputTextReg}
                         placeholder= 'Email'
                         onChangeText= {(email)=> setEmail(email)}
                     />
                     <TextInput
-                        style={styles.inputText}
+                        style={styles.inputTextReg}
                         placeholder= 'Password'
                         onChangeText= {(password)=> setPassword(password)}
                         secureTextEntry= {true}
@@ -112,23 +112,26 @@ export default function CitizenRegister(props) {
                             },
                             dateInput: {
                                 borderColor: color.backgroundBotTurquoise,
-                                borderWidth: 1,
+                                borderBottomWidth: 1,
+                                borderTopWidth: 0,
+                                borderRightWidth: 0,
+                                borderLeftWidth: 0,
                                 borderStyle: 'solid',
-                                borderRadius: 10,
                                 padding: 5,
                                 flexDirection: 'row',
                                 justifyContent: 'space-between',
                                 alignItems: 'center',
+                                
                             },
                         }}
                     onDateChange={(date) => {setDate(date);}}
                     />
                     <TextInput
-                        style={styles.inputText}
+                        style={styles.inputTextReg}
                         placeholder= 'Address'
                         onChangeText= {(address)=> setAddress(address)}
                     />
-                    <View style={styles.bottomTextInput}>
+                    <View style={styles.bottomTextInput}> 
 
                     <TextInput
                         style={styles.inputTextBottom}

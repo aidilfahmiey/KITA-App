@@ -1,10 +1,15 @@
+import { USER_STATE_CHANGE} from '../constants'
+
 const initialState= {
-    currentUser: null
+    currentUser: null,
 }
 
 export const citizen= (state= initialState, action)=> {
-    return{
-        ...state,
-        currentUser: action.currentUser
-    }
+    
+            return{
+                ...state,
+                currentUser: action.currentUser
+            }
+        
+    
 }

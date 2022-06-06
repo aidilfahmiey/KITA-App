@@ -36,7 +36,6 @@ export class Main extends Component {
         activeColor= {color.white}
         inactiveColor= {color.darkTurquoise}
         barStyle={{ backgroundColor: color.backgroundBotTurquoise }}
-        labeled= {false}
       > 
         <Tab.Screen
           name = "Home"

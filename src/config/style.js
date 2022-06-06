@@ -11,6 +11,12 @@ const styles = StyleSheet.create({
     padding: 35,
     flex: 1,
   },
+  mainBackground: {
+    backgroundColor: color.mainBackground,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   headerText: {
     fontWeight: 'bold',
     fontSize: 25,
@@ -62,15 +68,20 @@ const styles = StyleSheet.create({
     
   },
   inputText: {
-    borderColor: color.backgroundBotTurquoise,
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderRadius: 10,
     padding: 5,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    margin: 5,
+  },
+  inputTextReg: {
+    borderColor: color.backgroundBotTurquoise,
+    borderBottomWidth: 1,
+    borderStyle: 'solid',
+    padding: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    margin: 5
   },
   providerImageAuth: {
     resizeMode: "contain",
@@ -141,12 +152,44 @@ const styles = StyleSheet.create({
     
     width: '48%',
     borderColor: color.backgroundBotTurquoise,
-    borderWidth: 1,
+    borderBottomWidth: 1,
     borderStyle: 'solid',
-    borderRadius: 10,
-    
     padding: 5,
     
+  },
+  LoginEmail: {
+    alignItems: 'center',
+    margin: 5,
+    flexDirection: 'row',
+    borderColor: color.backgroundBotTurquoise,
+    borderWidth: 1,
+    borderStyle: 'solid',
+  },
+  LoginEmailIcon: {
+    width: 20,
+    marginLeft:10,
+    marginRight: 10
+  },
+  LoginPassword:{
+    alignItems: 'center',
+    margin: 5,
+    flexDirection: 'row',
+    borderColor: color.backgroundBotTurquoise,
+    borderWidth: 1,
+    borderStyle: 'solid',
+  },
+  LoginPasswordIcon:{
+    width: 20,
+    marginLeft:10,
+    marginRight: 10
+  },
+  PostsIcon: {
+    justifyContent: 'center', 
+      alignItems: 'center',
+      position: 'absolute',
+      bottom: 0,
+      paddingLeft: '77%',
+      paddingBottom: '3%'
   }
 });
 

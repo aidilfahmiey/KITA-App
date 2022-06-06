@@ -19,6 +19,10 @@ import AuthoritiesRegister from './src/components/screens/auth/AuthoritiesRegist
 
 import Start from './src/components/screens/Start';
 import Main from './src/components/screens/Main';
+import Posts from './src/components/screens/Posts';
+import Upload from './src/components/screens/Upload';
+import Aidscreen from './src/components/screens/main/Aidscreen';
+import color from './src/config/color';
 
 const Stack = createStackNavigator();
 const store= createStore(rootReducer, applyMiddleware(thunk));
@@ -92,10 +96,42 @@ export class App extends Component {
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Main">
             <Stack.Screen
-              name="Main"
+              name="KITA App"
               component={Main}
               navigation={this.props.navigation}
-              options={{ headerShown: false }}
+              options={{ 
+                headerStyle: {
+                  backgroundColor: color.mainBackground,
+                  borderBottomWidth: 1
+                },
+                headerTitleAlign: 'center',
+                headerTintColor: color.backgroundBotTurquoise
+                
+              }}
+            />
+            <Stack.Screen
+              name="Create Post"
+              component={Posts}
+              navigation={this.props.navigation}
+              options={{ 
+                headerStyle: {
+                  backgroundColor: color.mainBackground,
+                  borderBottomWidth: 1
+                },
+                headerTintColor: color.backgroundBotTurquoise
+              }}
+            />
+            <Stack.Screen
+              name="Post"
+              component={Upload}
+              navigation={this.props.navigation}
+              options={{ 
+                headerStyle: {
+                  backgroundColor: color.mainBackground,
+                  borderBottomWidth: 1
+                },
+                headerTintColor: color.backgroundBotTurquoise
+              }}
             />
           </Stack.Navigator>
         </NavigationContainer>
