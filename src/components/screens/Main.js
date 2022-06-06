@@ -3,9 +3,10 @@ import {Pressable, Text, View } from 'react-native';
 import styles from '../../config/style';
 import color from '../../config/color';
 import {createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {FontAwesome5 } from '@expo/vector-icons';
 import {MaterialIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -14,6 +15,8 @@ import {fetchUser} from '../../redux/actions/index';
 import Homescreen from './main/Homescreen'
 import Aidscreen from './main/Aidscreen';
 import Profilescreen from './main/Profilescreen';
+import Suggestionscreen from './main/Suggestionscreen'
+import Complaintscreen from './main/Complaintscreen'
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -47,12 +50,30 @@ export class Main extends Component {
           }}
         />
         <Tab.Screen
+          name = "Complaint"
+          component={Complaintscreen}
+          options= {{
+            tabBarIcon: ({focused, color, size})=> (
+              <Ionicons name="md-newspaper" color={color} size={24}/>
+            )
+          }}
+        />
+        <Tab.Screen
           name = "Aid"
           component={Aidscreen} 
           options= {{
             tabBarIcon: ({focused,color, size})=> (
               <FontAwesome5 name='hands-helping' color={color} size={20} />
             ),
+          }}
+        />
+        <Tab.Screen
+          name = "Suggestion"
+          component={Suggestionscreen}
+          options= {{
+            tabBarIcon: ({focused, color, size})=> (
+              <MaterialCommunityIcons name="lightbulb-on" color={color} size={24}/>
+            )
           }}
         />
         <Tab.Screen
@@ -64,6 +85,7 @@ export class Main extends Component {
             )
           }}
         />
+        
       </Tab.Navigator>
     )
   }

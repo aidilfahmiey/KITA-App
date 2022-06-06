@@ -56,8 +56,6 @@ export default function Upload(props, {navigation}) {
     
         task.on("state_changed", taskProgress, taskError, taskCompleted)
         
-        
-        props.navigation.navigate("KITA App");
     }
     
     
