@@ -10,7 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {fetchUser} from '../../redux/actions/index';
+import {fetchUser, fetchUserPosts, clearData} from '../../redux/actions/index';
 
 import Homescreen from './main/Homescreen'
 import Aidscreen from './main/Aidscreen';
@@ -22,7 +22,9 @@ const Tab = createMaterialBottomTabNavigator();
 
 export class Main extends Component {
   componentDidMount(){
+    this.props.clearData();
     this.props.fetchUser();
+    this.props.fetchUserPosts();
   }
   render() {
     const{ currentUser}= this.props;
@@ -95,6 +97,6 @@ const mapStateToProps= (store)=> ({
   currentUser: store.userState.currentUser
 })
 const mapDispatchProps= (dispatch)=> 
-  bindActionCreators({fetchUser}, dispatch)
+  bindActionCreators({fetchUser, fetchUserPosts, clearData}, dispatch)
 
 export default connect(mapStateToProps, mapDispatchProps)(Main);

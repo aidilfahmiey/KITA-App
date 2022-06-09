@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Alert, Image } from 'react-native';
+import { View, Text, TextInput, Alert, Image, ScrollView, RefreshControl } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import ActionButton from 'react-native-action-button';
 import * as ImagePicker from 'expo-image-picker';
@@ -10,6 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { camerastyle } from '../../config/CameraStyle';
 import { feedstyles } from '../../config/FeedStyle';
 import { poststyle } from '../../config/PostStyle';
+import Firebase from '../../database/firebase';
 
 const Posts = ({navigation}) => {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
@@ -18,6 +19,7 @@ const Posts = ({navigation}) => {
   const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
   const [image, setImage] = useState(null);
   const [WHText, setWHText] = useState(null);
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -71,8 +73,9 @@ const Posts = ({navigation}) => {
 
   return (
     <View style={feedstyles.feed}>
+    
       <View style={poststyle.InputWrapper}>
-      
+        
         <TextInput
           style = {poststyle.InputField}
           multiline = {true}
@@ -116,6 +119,7 @@ const Posts = ({navigation}) => {
           </ActionButton.Item>
 
       </ActionButton>
+      
     </View>
   )
 };

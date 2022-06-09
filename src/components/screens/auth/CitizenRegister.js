@@ -13,6 +13,7 @@ export default function CitizenRegister(props) {
     const [address, setAddress] = useState('');
     const [postcode, setPostcode] = useState('');
     const [state, setState] = useState('');
+    const [profileImage, setProfileImage] = useState('');
 
 
 
@@ -51,6 +52,7 @@ export default function CitizenRegister(props) {
                 address,
                 postcode,
                 state,
+                profileImage,
             });
             console.log(result)
         })
