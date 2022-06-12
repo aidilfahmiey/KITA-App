@@ -7,7 +7,8 @@ export const feedstyles = StyleSheet.create({
       alignItems: 'center',
       backgroundColor: color.mainBackground,
       borderBottomWidth: 2,
-      borderColor: color.white
+      borderColor: color.white,
+      width: '100%'
     },
     WH: {
         
@@ -46,7 +47,7 @@ export const feedstyles = StyleSheet.create({
     },
     card: {
         backgroundColor: color.lightgrey,
-        width: '100%',
+        width: 320,
         marginBottom: 10,
         borderRadius: 10,
         paddingTop:10,
@@ -80,7 +81,7 @@ export const feedstyles = StyleSheet.create({
     },
     PostText: {
         fontSize: 14,
-        color: color.black,
+        color: color.black, 
         fontFamily: 'sans-serif',
         paddingLeft: 15,
         paddingRight: 15,

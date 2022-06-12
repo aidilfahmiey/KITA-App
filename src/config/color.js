@@ -6,6 +6,7 @@ export default {
     mainBackground: "#F4FFF7",
     lightgrey: "#ebebeb",
     darkgrey: "#575757",
-    red: "#ea0000"
+    red: "#ea0000",
+    placeGrey: "#969696"
   };
   

@@ -1,4 +1,4 @@
-import { USER_STATE_CHANGE, USER_POSTS_STATE_CHANGE, CLEAR_DATA } from '../constants/index';
+import { USER_STATE_CHANGE, USER_POSTS_STATE_CHANGE, USERS_DATA_STATE_CHANGE, CLEAR_DATA } from '../constants/index';
 import Firebase from '../../database/firebase';
 
 export function clearData() {

@@ -13,6 +13,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
+import {fetchUser} from '../../../redux/actions/index';
+import AppLoader from '../AppLoader';
 
 
 function EditProfilescreen(props,{navigation}){
@@ -26,12 +28,13 @@ function EditProfilescreen(props,{navigation}){
     const [postcode, setPostcode] = useState('');
     const [state, setState] = useState('');
     const [profileImage, setProfileImage] = useState('');
+    const [show, setShow] = useState(false);
 
     const pickImage = async () => {
         const profileImage = await ImagePicker.launchImageLibraryAsync({
           mediaTypes: ImagePicker.MediaTypeOptions.Images,
           allowsEditing: true,
-          aspect: [4, 3],
+          aspect: [1, 1],
           quality: 1,
         })
     
@@ -43,6 +46,7 @@ function EditProfilescreen(props,{navigation}){
       };
 
       const uploadProfileImage = async () => {
+        setShow(false);
 
         if (profileImage == null) {
           Alert.alert('Must change photo.')
@@ -55,7 +59,6 @@ function EditProfilescreen(props,{navigation}){
       
           const response = await fetch(profileImage)
           const blob = await response.blob();
-          Alert.alert('Please wait for awhile')
           const task = Firebase
                         .storage()
                         .ref()
@@ -74,7 +77,7 @@ function EditProfilescreen(props,{navigation}){
               
               
             })
-          }
+          } 
       
           const taskError = (snapshot) => {
             console.log(snapshot)
@@ -82,6 +85,8 @@ function EditProfilescreen(props,{navigation}){
           
       
           task.on("state_changed", taskProgress, taskError, taskCompleted)
+
+          setShow(true);
           
       }
       
@@ -100,6 +105,7 @@ function EditProfilescreen(props,{navigation}){
                     profileImage: downloadURL,
                   
                 }).then((function (){
+                    fetchUser()
                     props.navigation.navigate("KITA App");
                 }))           
         }
@@ -107,12 +113,14 @@ function EditProfilescreen(props,{navigation}){
         const navigateToPrevScreen = () => {
             props.navigation.navigate("Profile");
             console.log('Return to profile')
+            setShow(true);
         }
   
       
     
 
   return (
+      <>
     <View style={editprofilestyle.container}>
     <ScrollView>
       <View style={{margin: 20}}>
@@ -155,10 +163,10 @@ function EditProfilescreen(props,{navigation}){
             <Ionicons name="person-outline" size={20} color="black" />
             <TextInput
                 placeholder={currentUser.name}
-                placeholderTextColor={color.darkgrey}
+                placeholderTextColor={color.placeGrey}
                 style={editprofilestyle.textInput}
                 value={name}
-                onChangeText= {(name)=> setName(name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '').replace(/[^a-z0-9]/gi, ''))}
+                onChangeText= {(name)=> setName(name)}
             />
         </View>
         
@@ -166,8 +174,8 @@ function EditProfilescreen(props,{navigation}){
         <MaterialCommunityIcons name="map-marker-outline" size={22} color="black" />
             
             <TextInput
-                placeholder='Address'
-                placeholderTextColor={currentUser.address}
+                placeholder={currentUser.address}
+                placeholderTextColor={color.placeGrey}
                 style={editprofilestyle.textInput}
                 onChangeText= {(address)=> setAddress(address)}
             />
@@ -176,7 +184,7 @@ function EditProfilescreen(props,{navigation}){
             <Entypo name="address" size={20} color="black" />
             <TextInput
                 placeholder={currentUser.postcode}
-                placeholderTextColor={color.darkgrey}
+                placeholderTextColor={color.placeGrey}
                 style={editprofilestyle.textInput}
                 onChangeText= {(postcode)=> setPostcode(postcode)}
             />
@@ -185,7 +193,7 @@ function EditProfilescreen(props,{navigation}){
             <Entypo name="location" size={20} color="black" />
             <TextInput
                 placeholder={currentUser.state}
-                placeholderTextColor={color.darkgrey}
+                placeholderTextColor={color.placeGrey}
                 style={editprofilestyle.textInput}
                 onChangeText= {(state)=> setState(state)}
             />
@@ -198,6 +206,7 @@ function EditProfilescreen(props,{navigation}){
                         date={date} // Initial date from state
                         mode="date" // The enum of date, datetime and time
                         placeholder={currentUser.date}
+                        placeholderTextColor={color.placeGrey}
                         format="DD-MM-YYYY"
                         minDate="01-01-1800"
                         maxDate={new Date()}
@@ -237,6 +246,8 @@ function EditProfilescreen(props,{navigation}){
       </View>
       </ScrollView>
     </View>
+    {show ? <AppLoader/>: null }
+    </>
   )
 }
 

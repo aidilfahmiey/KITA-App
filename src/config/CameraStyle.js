@@ -10,7 +10,7 @@ export const camerastyle = StyleSheet.create({
     fixedRatio: {
         flex: 1,
         aspectRatio: 1
-    },
+    }, 
     Utils: {
         justifyContent: 'center',
         alignItems: 'center',

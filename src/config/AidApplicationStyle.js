@@ -1,0 +1,118 @@
+import {StyleSheet} from "react-native";
+import color from './color';
+
+export const aidapplicationstyle = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#F4FFF7',
+    },
+    containerMain: {
+      padding: 25,
+    },
+    documents:{
+      fontSize: 14,
+      marginLeft: 5,
+      paddingVertical: 5,
+    }, 
+    inputText: {
+      borderColor: color.backgroundBotTurquoise,
+      borderWidth: 3,
+      borderStyle: 'solid',
+      borderRadius: 10,
+      padding: 10,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      margin: 5,
+      width:"90%",
+      alignSelf:"center",
+      borderRadius: 15,
+    },
+    Upload:{
+      flexDirection:'row',
+      alignSelf:"center",
+      margin:10,
+    },
+    UploadIcon: {
+      width: 20,
+    },
+    section: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingRight:20,
+      width:"90%",
+      alignSelf:"center",
+      marginTop:5,
+    },
+    paragraph: {
+      fontSize: 12,
+      margin:5,
+    },
+    checkbox: {
+      margin: 8,
+    },
+    mainBody: {
+      flex: 1,
+      justifyContent: 'center',
+      padding: 5,
+    },
+    UploadSelectButton:{
+      flexDirection: 'row',
+      alignSelf:"center",
+      padding: 5,
+    },
+    SelectButton: {
+      backgroundColor: '#167D7F',
+      color: '#FFFFFF',
+      borderColor: '#307ecc',
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 15,
+      marginLeft: 20,
+      marginRight:20,
+      width: 120,
+      height: 50,
+    },
+    UploadButton: {
+      backgroundColor: '#167D7F',
+      borderWidth: 0,
+      color: '#FFFFFF',
+      borderColor: '#307ecc',
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 15,
+      marginLeft: 20,
+      marginRight: 20,
+      width: 120,
+      height: 50,
+    },
+    buttonTextStyle: {
+      color: '#FFFFFF',
+      paddingVertical: 10,
+      fontSize: 16,
+    },
+    textStyle: {
+      backgroundColor: '#fff',
+      fontSize: 15,
+      marginTop: 16,
+      marginLeft: 35,
+      marginRight: 35,
+      textAlign: 'center',
+    },
+    submitButton: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      alignSelf: "center",
+      backgroundColor: "#167D7F",
+      width: '50%',
+      height: '12%',
+      borderRadius: 10,
+      marginTop:10,
+      borderRadius: 15,
+    },
+    submitText: {
+      color: "#FFFFFF",
+      fontWeight: 'bold',
+      fontSize: 18,
+    },
+  });

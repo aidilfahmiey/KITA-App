@@ -4,17 +4,19 @@ import Firebase from '../../../database/firebase';
 import styles from '../../../config/style';
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
+import AppLoader from '../AppLoader';
 
 export default function CitizenLogin(props) {
     
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [show, setShow] = useState(false);
 
     const citizenLogin = () => {
-        if(email === '' && password === '') {
-          Alert.alert('Enter details to sign in!')
-        } else {
-            
+
+        setShow(false);
+        
+        
           Firebase
           .auth()
           .signInWithEmailAndPassword(email, password)
@@ -23,11 +25,25 @@ export default function CitizenLogin(props) {
             console.log('User logged-in successfully!')
           
           })
-          .catch(error => this.setState({ errorMessage: error.message }))
-        }
+          .catch(error => {
+            switch(error.code) {
+                case 'auth/invalid-email': 
+                    Alert.alert('Invalid email or password!',
+                    'Please check every character entered and make sure no space.')
+                    setShow(false);
+                case 'auth/invalid-password':
+                    Alert.alert('Invalid email or password!',
+                    'Please check every character entered and make sure no space.')
+                    setShow(false);
+                break;
+            }
+        })
+        
+        setShow(true);
       }
- 
+      
         return (
+            <>
             <View style={styles.container}>
             <ScrollView>
                 <View style={styles.containerMain}>
@@ -79,6 +95,8 @@ export default function CitizenLogin(props) {
                 </Text>    
                 </ScrollView>
             </View>
+            {show ? <AppLoader/>: null }
+            </>
         )
     
 }

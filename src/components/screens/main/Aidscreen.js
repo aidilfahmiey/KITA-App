@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, FlatList} from 'react-native';
+import { View, FlatList} from 'react-native';
 import AidCard from '../../screens/main/AidCard';
+import { aidscreenstyle } from '../../../config/AidScreenStyle';
 
 const Data = [
 
@@ -34,7 +35,7 @@ const Data = [
 export default function Aidscreen({item,navigation}) {
 
   return (
-    <View style={styles.container}>
+    <View style={aidscreenstyle.container}>
       
       <FlatList
         data = {Data}
@@ -46,39 +47,3 @@ export default function Aidscreen({item,navigation}) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F7F7F7',
-    marginTop:100
-  },
-  listItem:{
-    margin:5,
-    padding:10,
-    backgroundColor:"#167D7F",
-    width:"90%",
-    flex:1,
-    alignSelf:"center",
-    flexDirection:"row",
-    borderRadius:8,
-  },
-  buttonStyle: {
-    backgroundColor: "#FFF",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  applyButton: {
-    backgroundColor: "#F9E79F",
-    justifyContent: "center",
-    alignItems: "center",
-    width: "20%",
-    padding: 5,
-    borderRadius: 8,
-  },
-  buttonText: {
-    fontWeight: "700",
-    fontSize: 14,
-    color: "#17202A",
-  },
-});

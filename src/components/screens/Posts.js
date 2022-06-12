@@ -45,7 +45,7 @@ const Posts = ({navigation}) => {
     const image = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [4, 3],
+      aspect: [1, 1],
       quality: 1,
     })
 
@@ -84,39 +84,41 @@ const Posts = ({navigation}) => {
           onChangeText= {(WHText)=> setWHText(WHText)}
           placeholder = "What's happening?"
         />
-        
+         
         <View style={poststyle.Divider}/>
 
-        <View style={{ width: '90%', height: '30%',  alignItems: 'center' }}>
+        <View style={{ width: '80%', height: '35%',  alignItems: 'center' }}>
           <View style={camerastyle.container}>
             <Camera 
               ref={ref => setCamera(ref)}
               style={camerastyle.fixedRatio}
               type={type}
-              ratio = {'4:3'}
+              ratio = {'1:1'}
             />
           </View>
         </View>
 
         <View style={poststyle.Divider}/>
 
-        {image && <Image source={{uri:image}} style={{width: '55%', height: '30%'}}/>}
+        {image && <Image source={{uri:image}} style={{width: '65%', height: '35%'}}/>}
 
       </View>
 
       <ActionButton buttonColor="#167D7F">
+
+          <ActionButton.Item buttonColor='#3498db' title="Post" onPress={() => navigation.navigate('Post',{image,WHText})}>
+            <Ionicons name="md-push-outline" style={poststyle.actionButtonIcon}/>
+          </ActionButton.Item>
           
-          <ActionButton.Item buttonColor='#3498db' title="Take Photo" onPress={() => takePicture()}>
+          <ActionButton.Item buttonColor='#1abc9c' title="Take Photo" onPress={() => takePicture()}>
             <Ionicons name="md-camera-outline" style={poststyle.actionButtonIcon}/>
           </ActionButton.Item>
           
-          <ActionButton.Item buttonColor='#1abc9c' title="Choose Photo" onPress={() => pickImage()}>
+          <ActionButton.Item buttonColor='#00b300' title="Choose Photo" onPress={() => pickImage()}>
             <Ionicons name="md-duplicate-outline" style={poststyle.actionButtonIcon} />
           </ActionButton.Item>
 
-          <ActionButton.Item buttonColor='#00b300' title="Post" onPress={() => navigation.navigate('Post',{image,WHText})}>
-            <Ionicons name="md-push-outline" style={poststyle.actionButtonIcon}/>
-          </ActionButton.Item>
+         
 
       </ActionButton>
       

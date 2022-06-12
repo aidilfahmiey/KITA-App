@@ -24,7 +24,9 @@ import Upload from './src/components/screens/Upload';
 import Aidscreen from './src/components/screens/main/Aidscreen';
 import color from './src/config/color';
 import EditProfilescreen from './src/components/screens/main/EditProfilescreen';
-import Application from './src/components/screens/main/applyAid';
+import Applyaidscreen from './src/components/screens/main/ApplyAid';
+import Complaintscreen from './src/components/screens/main/Complaintscreen';
+import Profilescreen from './src/components/screens/main/Profilescreen';
 
 const Stack = createStackNavigator();
 const store= createStore(rootReducer, applyMiddleware(thunk));
@@ -150,7 +152,33 @@ export class App extends Component {
             />
             <Stack.Screen
               name="Apply Aid"
-              component={Application}
+              component={Applyaidscreen}
+              navigation={this.props.navigation}
+              options={{ 
+                headerStyle: {
+                  backgroundColor: color.mainBackground,
+                  borderBottomWidth: 1
+                },
+                headerTitleAlign: 'center',
+                headerTintColor: color.backgroundBotTurquoise
+              }}
+            />
+            <Stack.Screen
+              name="Complaint"
+              component={Complaintscreen}
+              navigation={this.props.navigation}
+              options={{ 
+                headerStyle: {
+                  backgroundColor: color.mainBackground,
+                  borderBottomWidth: 1
+                },
+                headerTitleAlign: 'center',
+                headerTintColor: color.backgroundBotTurquoise
+              }}
+            />
+            <Stack.Screen
+              name="Profilescreen"
+              component={Profilescreen}
               navigation={this.props.navigation}
               options={{ 
                 headerStyle: {

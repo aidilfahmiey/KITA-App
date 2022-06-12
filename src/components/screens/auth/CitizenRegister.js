@@ -4,6 +4,7 @@ import Firebase from '../../../database/firebase';
 import styles from '../../../config/style';
 import DatePicker from 'react-native-datepicker';
 import color from '../../../config/color';
+import AppLoader from '../AppLoader';
 
 export default function CitizenRegister(props) {
     const [name, setName] = useState('');
@@ -14,11 +15,12 @@ export default function CitizenRegister(props) {
     const [postcode, setPostcode] = useState('');
     const [state, setState] = useState('');
     const [profileImage, setProfileImage] = useState('');
+    const [show, setShow] = useState(false);
 
 
 
     const citizenSignUp= ()=> {
-        
+        setShow(false);
         if (
             name == '' ||
             date == '' ||
@@ -56,15 +58,21 @@ export default function CitizenRegister(props) {
             });
             console.log(result)
         })
-        .catch(() => {
-            setIsValid({ bool: true, boolSnack: true, message: "Something went wrong" })
-        }).catch(() => {
-            setIsValid({ bool: true, boolSnack: true, message: "Something went wrong" })
+        .catch(error => {
+            switch(error.code) {
+                case 'auth/email-already-exists':
+                    Alert.alert('Email already in use !',
+                    'Please use another email.')
+                    setShow(false);
+                break;
+            }
         })
+
+        setShow(true);
     }
 
         return (
-            
+            <>
             <View style={styles.container}>
             <ScrollView>
                 <View style={styles.containerMain}>
@@ -82,7 +90,7 @@ export default function CitizenRegister(props) {
                         style={styles.inputTextReg}
                         placeholder= 'Name'
                         value={name}
-                        onChangeText= {(name)=> setName(name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '').replace(/[^a-z0-9]/gi, ''))}
+                        onChangeText= {(name)=> setName(name)}
                     />
                     <TextInput
                         style={styles.inputTextReg}
@@ -167,5 +175,7 @@ export default function CitizenRegister(props) {
                 </View>
              </ScrollView>
             </View>
+            {show ? <AppLoader/>: null }
+            </>
         )
         }

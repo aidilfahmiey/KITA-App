@@ -1,23 +1,31 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity} from 'react-native';
-import { feedstyles } from '../../../config/FeedStyle';
+import { aidfeedstyles } from '../../../config/AidFeedStyle';
+import {useNavigation} from '@react-navigation/native';
 
-const AidCard = ({item}) => {
-    
+function AidCard({item}){
+
+  const navigation = useNavigation();
     return (
-    
-        <View style={feedstyles.feed}>
-            <View style={feedstyles.card}>
-              <View style={feedstyles.UserInfo}>
+     
+        <View style={aidfeedstyles.feed}>
+            <View style={aidfeedstyles.card}>
+              <View style={aidfeedstyles.UserInfo}>
                 
                
-                <View style={feedstyles.UserInfoText}>
-                  <Text style={feedstyles.UserName}>{item.aidName}</Text>
+                <View style={aidfeedstyles.UserInfoText}>
+                  <Text style={aidfeedstyles.UserName}>{item.aidName}</Text>
+
+                  
                 </View>
+                
+
               </View>
-              
-            <View style={feedstyles.Divider}></View>
-              
+              <TouchableOpacity
+                    onPress={() => navigation.navigate('Apply Aid')}
+                    style={aidfeedstyles.applyButton}>
+                    <Text style={aidfeedstyles.buttonText}>Apply</Text>
+                  </TouchableOpacity>
             </View>
         </View>
       )

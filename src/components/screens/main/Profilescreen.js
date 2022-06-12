@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import { profilestyle } from '../../../config/Profilestyle';
 import Firebase from '../../../database/firebase';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import {fetchUser} from '../../../redux/actions/index';
 
 function Profilescreen(props,{navigation}) {
   const { currentUser, posts} = props;
@@ -12,7 +13,7 @@ function Profilescreen(props,{navigation}) {
   console.log({currentUser, posts})
 
   const navigateToPrevScreen = () => {
-    props.navigation.navigate("Profile");
+    props.navigation.navigate("Profile"); 
     console.log('Return to profile')
   }
 
@@ -39,11 +40,12 @@ function Profilescreen(props,{navigation}) {
   }
 
   const pullRefresh = () =>{
+    fetchUser()
     setRefresh(true)
 
     setTimeout(()=>{
       setRefresh(false)
-    },6000)
+    },10000)
   }
 
   const {pin, setPin}= React.useState({

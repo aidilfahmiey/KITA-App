@@ -3,8 +3,9 @@ import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, Image}
 import Checkbox from 'expo-checkbox';
 import { Entypo } from '@expo/vector-icons'; 
 import DocumentPicker from 'react-native-document-picker';
+import { aidapplicationstyle } from '../../../config/AidApplicationStyle';
 
-export default function Application() {
+export default function Applyaidscreen({navigation}) {
 
   const [name, setName] = useState('');
   const [nric, setNric] = useState('');
@@ -20,6 +21,7 @@ export default function Application() {
     alert('Enter complete details to proceed the application');
     }
     else {
+    navigation.navigate('Home')
     alert('Your application submitted successfully');
     }
   };
@@ -71,30 +73,30 @@ export default function Application() {
 
   return(
 
-    <View style={styles.container}>
+    <View style={aidapplicationstyle.container}>
     <ScrollView>
-    <View style={styles.containerMain}>
+    <View style={aidapplicationstyle.containerMain}>
             
         <TextInput
-        style={styles.inputText}
+        style={aidapplicationstyle.inputText}
         placeholder= 'Name' placeholderTextColor="grey"
         value={name}
         onChangeText= {(name)=> setName(name)}
         />
 
         <TextInput
-        style={styles.inputText}
+        style={aidapplicationstyle.inputText}
         placeholder= 'I/C Number' placeholderTextColor="grey"
         onChangeText= {(nric)=> setNric(nric)}
         />
         
         <TextInput
-        style={styles.inputText}
+        style={aidapplicationstyle.inputText}
         placeholder= 'Address' placeholderTextColor="grey"
         onChangeText= {(address)=> setAddress(address)}
         />
     {singleFile != null ? (
-     <Text style={styles.textStyle}>
+     <Text style={aidapplicationstyle.textStyle}>
           File Name: {singleFile.name ? singleFile.name : ''}
           {'\n'}
           Type: {singleFile.type ? singleFile.type : ''}
@@ -106,41 +108,42 @@ export default function Application() {
       </Text>
        ) : null}
 
-      <View style={styles.Upload}>
-          <View style={styles.UploadIcon}>
-          <Entypo name="upload" size={24} color="black" />
+      <View style={aidapplicationstyle.Upload}>
+          <View style={aidapplicationstyle.UploadIcon}>
+          <Entypo name="upload" size={20} color="black" />
           </View>
-          <Text style={styles.documents}>Upload required documents</Text>
+          <Text style={aidapplicationstyle.documents}>Upload required documents</Text>
       </View>
 
-      <View style={styles.UploadSelectButton}>
+      <View style={aidapplicationstyle.UploadSelectButton}>
+      <View style={aidapplicationstyle.Select}>
       <TouchableOpacity
-        style={styles.SelectButton}
+        style={aidapplicationstyle.SelectButton}
         activeOpacity={0.5}
         onPress={selectFile}>
-        <Text style={styles.buttonTextStyle}>Select File</Text>
+        <Text style={aidapplicationstyle.buttonTextStyle}>Select File</Text>
       </TouchableOpacity>
-
+      </View>
       <TouchableOpacity
-        style={styles.UploadButton}
+        style={aidapplicationstyle.UploadButton}
         activeOpacity={0.5}
         onPress={uploadImage}>
-        <Text style={styles.buttonTextStyle}>Upload File</Text>
+        <Text style={aidapplicationstyle.buttonTextStyle}>Upload File</Text>
       </TouchableOpacity>
       </View>
-      <View style={styles.section}>
+      <View style={aidapplicationstyle.section}>
         <Checkbox
-          style={styles.checkbox}
+          style={aidapplicationstyle.checkbox}
           value={isChecked}
           onValueChange={setChecked}
-          color={isChecked ? '#4630EB' : undefined}/>
-        <Text style={styles.paragraph}>I agree to the terms and conditions as set out by the user agreements</Text>
+          color={isChecked ? "#167D7F" : undefined}/>
+        <Text style={aidapplicationstyle.paragraph}>I agree to the terms and conditions as set out by the user agreements</Text>
       </View>
 
       <TouchableOpacity
-        style={styles.submitButton}
+        style={aidapplicationstyle.submitButton}
         onPress={()=> AidApplication()}>
-        <Text style={styles.submitText}>Submit</Text>
+        <Text style={aidapplicationstyle.submitText}>Submit</Text>
       </TouchableOpacity>
     
     </View>
@@ -149,118 +152,3 @@ export default function Application() {
 
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F7F7F7',
-    marginTop:100,
-  },
-  containerMain: {
-    padding: 35,
-    flex: 1,
-  },
-  documents:{
-    fontSize: 14,
-    marginLeft: 5,
-    paddingVertical: 5,
-  }, 
-  inputText: {
-    borderColor: "#48C9B0",
-    borderWidth: 3,
-    borderStyle: 'solid',
-    borderRadius: 10,
-    padding: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    margin: 5,
-    width:"90%",
-    alignSelf:"center",
-    borderRadius: 15,
-  },
-  Upload:{
-    flexDirection:'row',
-    alignSelf:"center",
-    margin:10,
-  },
-  UploadIcon: {
-    width: 20,
-  },
-  section: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingRight:20,
-    width:"90%",
-    alignSelf:"center"
-  },
-  paragraph: {
-    fontSize: 12,
-    margin:5,
-  },
-  checkbox: {
-    margin: 8,
-  },
-  mainBody: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 20,
-  },
-  UploadSelectButton:{
-    flexDirection: 'row',
-    alignSelf:"center",
-    padding: 10,
-  },
-  SelectButton: {
-    backgroundColor: '#307ecc',
-    color: '#FFFFFF',
-    borderColor: '#307ecc',
-    height: 40,
-    alignItems: 'center',
-    borderRadius: 15,
-    marginLeft: 30,
-    marginRight: 30,
-    width: 100,
-  },
-  UploadButton: {
-    backgroundColor: '#307ecc',
-    borderWidth: 0,
-    color: '#FFFFFF',
-    borderColor: '#307ecc',
-    height: 40,
-    alignItems: 'center',
-    borderRadius: 15,
-    marginLeft: 30,
-    marginRight: 30,
-    width: 100,
-  },
-  buttonTextStyle: {
-    color: '#FFFFFF',
-    paddingVertical: 10,
-    fontSize: 16,
-  },
-  textStyle: {
-    backgroundColor: '#fff',
-    fontSize: 15,
-    marginTop: 16,
-    marginLeft: 35,
-    marginRight: 35,
-    textAlign: 'center',
-  },
-  submitButton: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignSelf: "center",
-    backgroundColor: "#48C9B0",
-    width: '30%',
-    height: '13%',
-    borderRadius: 10,
-    marginTop:10,
-    borderRadius: 15,
-  },
-  submitText: {
-    color: "#FFFFFF",
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
-});

@@ -5,7 +5,8 @@ import { getAuth } from "firebase/auth";
 require("@react-native-firebase/firestore")
 require("@react-native-firebase/storage")
 import Firebase from '../../database/firebase';
-import { serverTimestamp } from 'firebase/firestore'
+import { serverTimestamp } from 'firebase/firestore';
+import AppLoader from './AppLoader';
 
 export default function Upload(props, {navigation}) {
     console.log(props.route.params.image)
@@ -14,6 +15,7 @@ export default function Upload(props, {navigation}) {
     const UserText = props.route.params.WHText;
     const uri = props.route.params.image;
     const [user, setUser] = useState();
+    const [show, setShow] = useState(false);
     
     const getUser = async () => {
       const documentSnapshot = await Firebase.firestore()
@@ -29,8 +31,10 @@ export default function Upload(props, {navigation}) {
     },[]); 
     
     
-
+ 
     const uploadPost = async () => {
+
+      setShow(false);
 
       if (uri == null) {
         Alert.alert('Must include photo.')
@@ -48,7 +52,6 @@ export default function Upload(props, {navigation}) {
     
         const response = await fetch(uri)
         const blob = await response.blob();
-        Alert.alert('Please wait for awhile')
         const task = Firebase
                       .storage()
                       .ref()
@@ -74,6 +77,8 @@ export default function Upload(props, {navigation}) {
         }
     
         task.on("state_changed", taskProgress, taskError, taskCompleted)
+
+        setShow(true);
         
     }
     
@@ -85,13 +90,15 @@ export default function Upload(props, {navigation}) {
           Firebase
             .firestore()
             .collection('posts')
-            .doc(Firebase.auth().currentUser.uid)
-            .collection('userPosts')
+            // .doc(Firebase.auth().currentUser.uid)
+            // .collection('userPosts')
             .add({
                 downloadURL: downloadURL,
                 creation: serverTimestamp(),
                 UserText: UserText,
                 Postcode: user.postcode,
+                Name: user.name,
+                Profile: user.profileImage,
                 uid: Firebase.auth().currentUser.uid,
             }).then((function (){
               props.navigation.navigate("KITA App");
@@ -101,9 +108,11 @@ export default function Upload(props, {navigation}) {
 
     const navigateToPrevScreen = () => {
         props.navigation.navigate("KITA App");
+        setShow(true);
       }
 
   return (
+    <>
     <View style={uploadstyle.main}>
 
       <View style={uploadstyle.contain}>
@@ -125,6 +134,8 @@ export default function Upload(props, {navigation}) {
       </View>
 
     </View>
+    {show ? <AppLoader/>: null }
+    </>
   )
 }
 
