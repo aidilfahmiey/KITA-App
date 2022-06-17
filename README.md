@@ -3,7 +3,7 @@ Final Year Project
 
 ###Documentation:
 1. Poster of the application.
-![Poster KITA APP](KITA_APP_Poster_FYP2.jpg)
+![Poster KITA APP](assets/KITA_APP_Poster_FYP2.jpg)
 2. User Interface
 
 ###Steps to run this code:
