@@ -1,15 +1,20 @@
 # KITA-App
 Final Year Project
 
-###Documentation:
+### Documentation:
 1. Poster of the application.
 ![Poster KITA APP](assets/KITA_APP_Poster_FYP2.jpg)
 2. User Interface
-
-###Steps to run this code:
-
-1. You need to install all of these module into your project directory.
+![Homescreen](assets/Homescreen.jpg)
+![Post](assets/Post.jpg)
+![Complaint](assets/Complaint.jpg)
+![Aid](assets/Aid.jpg)
+![Suggestion](assets/Suggestion.jpg)
+![Profile](assets/Profile.jpg)
 ---
+### Steps to run this code:
+1. You need to install all of these module into your project directory.
+
 - expo init 'appstittle'
 - expo install firebase
 - expo add redux
@@ -40,10 +45,8 @@ Final Year Project
 - expo install react-native-screens
 - expo install react-native-safe-area-context
 - expo install @react-native-community/masked-view
----
 
 2. After that you just can enter the command in the terminal 'expo start -c' to run this application.
-
 
 
 
